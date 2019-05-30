@@ -2,7 +2,7 @@ package demo;
 //在一个数组中找出出现次数最多的字符
 public class BubbleSort {
     public static void main(String[] args){
-        String s="aaahssjhssssssssshwws123222";
+        String s="aaahssjhssssssshwws123222";
         // 转化为字符数组。
         char[] c=s.toCharArray();
         int[] b=new int[127];
