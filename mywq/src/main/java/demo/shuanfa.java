@@ -3,10 +3,7 @@ package demo;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class shuanfa {
     /**1
@@ -318,6 +315,73 @@ public class shuanfa {
             if (tmp==null) return false;
         }
         return true;
+    }
+
+    /**
+     * 怎样翻转链表?
+     * 迭代法
+     */
+    public static void reverse(ListNode node){
+        ListNode pre=null;
+        ListNode now=node;
+        while (now!=null){
+            ListNode next=now.next;
+            node.next=pre;
+            pre=now;
+            now=next;
+        }
+    }
+
+    /**
+     * 递归方法
+     */
+/*    public Node reverse2(Node node, Node prev) {
+        if (node.next == null) {
+            node.next = prev;
+            return node;
+        } else {
+            Node re = reverse2(node.next, node);
+            node.next = prev;
+            return re;
+        }
+    }*/
+
+    /**
+     * 在未排序链表中，怎样移除重复的节点?
+     * 使用缓冲区N   时间复杂度N
+     */
+    public static void deleteDups(ListNode head) {
+        Hashtable<Integer, Boolean> table = new Hashtable<Integer, Boolean>();
+        //当前指针的前一个指针
+        ListNode pre = null;
+        while (head != null) {
+            if (table.contains(head.data)) {
+                pre.next = head.next;
+            } else {
+                table.put(head.data, true);
+                pre = head;
+            }
+            head = head.next;
+        }
+    }
+
+    //2不使用缓冲区   时间复杂度N*N（直接遍历）
+    public static void deleteDups2(ListNode head) {
+        if (head == null || head.next == null) {
+            return;
+        }
+        ListNode current = head;
+        while (current != null) {
+            ListNode p = current;
+            while (p.next != null) {
+                if (p.next.data == current.data) {
+                    p.next = p.next.next;
+                } else {
+                    p = p.next;
+                }
+            }
+            current = current.next;
+        }
     }
 
     @Test
