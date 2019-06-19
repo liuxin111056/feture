@@ -424,6 +424,41 @@ public class shuanfa {
         }
     }
 
+    /**
+     *如何使用递归实现字符串反转?
+     */
+    public String reverseStr(String str){
+        if(str.length() <= 1){
+            return str;
+        }
+        return reverseStr(str.substring(1)) + str.charAt(0);
+    }
+    /**
+     *如何使用递归实现字符串反转?
+     */
+    public void reverseStr1(String str){
+        StringBuffer bf=new StringBuffer();
+        for (int i=str.length()-1;i>=0;i--){
+            bf.append(str.charAt(i));
+        }
+        System.out.println(bf.toString());
+    }
+
+    /**
+     * 如何从字符串中输出第一个不重复字符？
+     */
+    public String findFisrstStr(String str){
+        for (int i=0;i< str.length();i++){
+            String sub=str.substring(i,i+1);
+            if ((str.length()- str.replace(sub,"").length())==1){
+                return sub ;
+            }
+        }
+        return "No Same";
+    }
+
+
+
     @Test
     public void tt(){
         int days= findDay(2015,12,12);
@@ -465,6 +500,9 @@ public class shuanfa {
         n5.next=n6;
        // System.out.println(hasLoop2(n1));
        // yang();
-        deleteSameString1("12333");
+        //String aa=reverseStr("12333");
+        //System.out.println(aa);
+        System.out.println(findFisrstStr("hoaohf"));
+
     }
  }
