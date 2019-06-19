@@ -265,6 +265,61 @@ public class shuanfa {
         quickSort(arr, j+1, high);
     }
 
+    /**
+     * 在一次遍历中，怎样发现单个链表的中间元素?
+     */
+    class ListNode{
+        int data;
+        ListNode next;
+
+
+    }
+    public static void FindMid(ListNode first){
+        ListNode fast = first;
+        ListNode slow = first;
+        while((fast != null)&&(fast.next != null)){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        System.out.println(slow.data);
+
+    }
+
+    /**
+     * 怎样验证给定的链表是环形的? 怎样发现这个环的起始节点?
+     * //定义两个指针tmp1,tmp2
+     */
+    public static boolean hasLoop(ListNode n){
+        ListNode tmp1=n;
+        ListNode tmp2=n.next;
+        while (tmp2!=null){
+            int d1=tmp1.data;
+            int d2=tmp2.data;
+            if (d1==d2) return true;
+            tmp1 = tmp1.next;
+            tmp2 = tmp2.next.next;
+            if (tmp2==null) return false;
+        }
+        return true;
+    }
+
+    /**
+     * 方法2：将每次走过的节点保存到hash表中，如果节点在hash表中，则表示存在环
+     * @param n
+     * @return
+     */
+    public static boolean hasLoop2(ListNode n){
+        ListNode tmp=n;
+        HashMap map=new HashMap();
+        while (n!=null){
+            if (map.get(tmp)!=null) return true;
+            else map.put(tmp,tmp);
+            tmp=tmp.next;
+            if (tmp==null) return false;
+        }
+        return true;
+    }
+
     @Test
     public void tt(){
         int days= findDay(2015,12,12);
@@ -285,7 +340,25 @@ public class shuanfa {
        // twoSum(arr,8);
         //RemoveSameNum2(arr);
         //reverseByStack(arr);
-        quickSort(arr,0,arr.length-1);
-        System.out.println(Arrays.toString(arr));
+        //quickSort(arr,0,arr.length-1);
+        //System.out.println(Arrays.toString(arr));
+        ListNode n1 = new ListNode();
+        ListNode n2 = new ListNode();
+        ListNode n3 = new ListNode();
+        ListNode n4 = new ListNode();
+        ListNode n5 = new ListNode();
+        ListNode n6 = new ListNode();
+        n1.data = 1;
+        n2.data = 2;
+        n3.data = 3;
+        n4.data = 4;
+        n5.data = 5;
+        n6.data=6;
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+        n4.next = n5;
+        n5.next=n6;
+        System.out.println(hasLoop2(n1));
     }
  }
