@@ -384,6 +384,46 @@ public class shuanfa {
         }
     }
 
+    /**
+     * 字符去重？
+     */
+    public void deleteSameString(String str){
+        char[] ch=str.toCharArray();
+        List list=new ArrayList();
+        for(char c:ch){
+            if (!list.contains(c)){
+                list.add(c);
+            }
+        }
+        for (int i=0;i<list.size();i++){
+           System.out.println(list.get(i));
+        }
+    }
+
+    /**
+     *  字符去重
+     *  HashSet
+     */
+    public void deleteSameString1(String str){
+        char[] ch=str.toCharArray();
+        //保存去重后的字符
+        Set<Character> set1=new HashSet<>();
+        //保存去重的字符
+        Set<Character> set2=new HashSet<>();
+        for (char c:ch){
+            boolean b=set1.add(c);
+            if (!b){
+                set2.add(c);
+            }
+        }
+        for (char c:set1){
+            System.out.println(c);
+        }
+        for (char c:set2){
+            System.out.println(c);
+        }
+    }
+
     @Test
     public void tt(){
         int days= findDay(2015,12,12);
@@ -423,6 +463,8 @@ public class shuanfa {
         n3.next = n4;
         n4.next = n5;
         n5.next=n6;
-        System.out.println(hasLoop2(n1));
+       // System.out.println(hasLoop2(n1));
+       // yang();
+        deleteSameString1("12333");
     }
  }
