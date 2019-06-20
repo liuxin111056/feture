@@ -142,6 +142,7 @@ public class shuanfa {
     public static void findSameNumber1(int[] num) {
         Arrays.sort(num);
         int[] arr=new int[num[num.length-1]+1];
+       // int[] arr=new int[127];
         for(int i = 0; i < num.length-1; i++) {
                 arr[num[i]]++;
         }
@@ -457,7 +458,50 @@ public class shuanfa {
         return "No Same";
     }
 
+    /**
+     * 如何在字符串中找到重复字符？
+     */
+    public void findSaneStr(String str){
+        for (int i=0;i<str.length();i++){
+            String sub=str.substring(i,i+1);
+            if ((str.length()-str.replace(sub,"").length())>1){
+                System.out.println(sub);
+            }
+        }
+    }
 
+    /**
+     * 如何计算给定字符传中特定字符出现的次数？
+     */
+    public void CountNumStr(String str,String c){
+        //for (int i=0;i<str.length();i++){
+            System.out.println(str.length()-str.replace(c,"").length());
+      //  }
+    }
+
+    /**
+     * 如何判断两个字符串是否互为旋转？
+     */
+    public void isXuanzhuan(String s1,String s2){
+        char[] ch1=new char[127];
+        char[] ch2=new char[127];
+        char[] s11=s1.toCharArray();
+        char[] s22=s2.toCharArray();
+
+        for (int i=0;i<s11.length;i++){
+            ch1[s11[i]]++;
+        }
+        for (int i=0;i<s22.length;i++){
+            ch2[s22[i]]++;
+        }
+        Arrays.sort(s11);
+        Arrays.sort(s22);
+        if (Arrays.equals(s11,s22)){
+            System.out.println("1");
+        }else {
+            System.out.println("0");
+        }
+    }
 
     @Test
     public void tt(){
@@ -471,10 +515,10 @@ public class shuanfa {
        // String aa=reverseByStack("123456");
       //  System.out.println(aa);
     //6
-        int[] arr = {10,7,2,4,7,62,3,4,2,1,8,9,19};
+        int[] arr = {10,7,2,4,7,62,3,4,2,1,8,9,19,1000000,1000000};
 
-       // findSameNumber(arr);
-       //findSameNumber1(arr);
+       //findSameNumber(arr);
+     //  findSameNumber1(arr);
         //findMaxAndMin(arr);
        // twoSum(arr,8);
         //RemoveSameNum2(arr);
@@ -502,7 +546,9 @@ public class shuanfa {
        // yang();
         //String aa=reverseStr("12333");
         //System.out.println(aa);
-        System.out.println(findFisrstStr("hoaohf"));
+        //System.out.println(findFisrstStr("hoaohf"));
+        //CountNumStr("122222223345","2");
+        //isXuanzhuan("123","2311");
 
     }
  }
