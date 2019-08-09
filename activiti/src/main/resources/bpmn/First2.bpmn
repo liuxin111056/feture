@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="GBK" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/test" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:yaoqiang="http://bpmn.sourceforge.net" exporter="Yaoqiang BPMN Editor" exporterVersion="5.3" expressionLanguage="http://www.w3.org/1999/XPath" id="_1565326040785" name="" targetNamespace="http://www.activiti.org/test" typeLanguage="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd">
+  <process id="process1" isClosed="false" isExecutable="true" name="process1" processType="None">
+    <extensionElements>
+      <yaoqiang:description/>
+      <yaoqiang:pageFormat height="841.8897637795276" imageableHeight="831.8897637795276" imageableWidth="588.1102362204724" imageableX="5.0" imageableY="5.0" orientation="0" width="598.1102362204724"/>
+      <yaoqiang:page background="#FFFFFF" horizontalCount="1" verticalCount="1"/>
+    </extensionElements>
+    <startEvent id="startevent1" isInterrupting="true" name="Start" parallelMultiple="false">
+      <outgoing>flow1</outgoing>
+      <outputSet/>
+    </startEvent>
+    <serviceTask activiti:class="activiti.A" completionQuantity="1" id="servicetask1" implementation="##WebService" isForCompensation="false" name="Service Task" startQuantity="1">
+      <incoming>flow1</incoming>
+      <outgoing>flow2</outgoing>
+    </serviceTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="servicetask1"/>
+    <serviceTask activiti:class="activiti.B" completionQuantity="1" id="servicetask2" implementation="##WebService" isForCompensation="false" name="Service Task" startQuantity="1">
+      <incoming>flow2</incoming>
+      <outgoing>flow3</outgoing>
+    </serviceTask>
+    <sequenceFlow id="flow2" sourceRef="servicetask1" targetRef="servicetask2"/>
+    <endEvent id="endevent1" name="End">
+      <incoming>flow3</incoming>
+      <inputSet/>
+    </endEvent>
+    <sequenceFlow id="flow3" sourceRef="servicetask2" targetRef="endevent1"/>
+  </process>
+  <bpmndi:BPMNDiagram id="Yaoqiang_Diagram-process1" name="Untitled Diagram" resolution="96.0">
+    <bpmndi:BPMNPlane bpmnElement="process1">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="Yaoqiang-startevent1">
+        <omgdc:Bounds height="32.0" width="32.0" x="150.0" y="190.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="21.02" width="29.0" x="151.5" y="229.49"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask1" id="Yaoqiang-servicetask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="230.0" y="180.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="21.02" width="69.0" x="248.0" y="198.99"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask2" id="Yaoqiang-servicetask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="380.0" y="180.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="21.02" width="69.0" x="398.0" y="198.99"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="Yaoqiang-endevent1">
+        <omgdc:Bounds height="32.0" width="32.0" x="530.0" y="190.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="21.02" width="24.0" x="534.0" y="229.49"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="Yaoqiang-flow3">
+        <omgdi:waypoint x="485.0" y="207.5"/>
+        <omgdi:waypoint x="530.0" y="206.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="21.02" width="6.0" x="504.5" y="196.24"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="Yaoqiang-flow2">
+        <omgdi:waypoint x="335.0" y="207.5"/>
+        <omgdi:waypoint x="380.0" y="207.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="21.02" width="6.0" x="354.5" y="196.99"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="Yaoqiang-flow1">
+        <omgdi:waypoint x="182.0" y="206.0"/>
+        <omgdi:waypoint x="230.0" y="207.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="21.02" width="6.0" x="203.0" y="196.24"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
