@@ -227,7 +227,7 @@ public class shuanfa {
      * 快速排序
      */
 
-    public static void quickSort(int[] arr,int low,int high){
+    public static void quickSort1(int[] arr,int low,int high){
         int i,j,temp,t;
         if(low>high){
             return;
