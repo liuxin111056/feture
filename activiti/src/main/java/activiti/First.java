@@ -1,7 +1,9 @@
 package activiti;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.activiti.engine.*;
-import org.activiti.engine.task.Task;
 
 /**
  * 第一个流程运行类
@@ -24,7 +26,9 @@ public class First {
 		repositoryService.createDeployment()
 				.addClasspathResource("bpmn/First.bpmn").deploy();
 		// 启动流程
-		runtimeService.startProcessInstanceByKey("process1");
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("redict", "C");
+		runtimeService.startProcessInstanceByKey("process1",map);
 		// 退出
 		System.exit(0);
 	}
