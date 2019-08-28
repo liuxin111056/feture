@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="GBK" standalone="yes"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/test" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:yaoqiang="http://bpmn.sourceforge.net" exporter="Yaoqiang BPMN Editor" exporterVersion="5.3" expressionLanguage="http://www.w3.org/1999/XPath" id="_1563935431747" name="" targetNamespace="http://www.activiti.org/test" typeLanguage="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd">
-  <process id="process1" isClosed="false" name="process1" processType="None">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/test" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:yaoqiang="http://bpmn.sourceforge.net" exporter="Yaoqiang BPMN Editor" exporterVersion="5.3" expressionLanguage="http://www.w3.org/1999/XPath" id="_1566953396655" name="" targetNamespace="http://www.activiti.org/test" typeLanguage="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd">
+  <process id="process1" isClosed="false" isExecutable="true" name="process1" processType="None">
     <extensionElements>
       <yaoqiang:description/>
       <yaoqiang:pageFormat height="841.8897637795276" imageableHeight="831.8897637795276" imageableWidth="588.1102362204724" imageableX="5.0" imageableY="5.0" orientation="0" width="598.1102362204724"/>
@@ -10,67 +10,111 @@
       <outgoing>flow1</outgoing>
       <outputSet/>
     </startEvent>
-    <userTask completionQuantity="1" id="usertask1" implementation="##unspecified" isForCompensation="false" name="Expense Request" startQuantity="1">
+    <serviceTask activiti:class="activiti.A" completionQuantity="1" id="servicetask1" implementation="##WebService" isForCompensation="false" name="Service Task" startQuantity="1">
       <incoming>flow1</incoming>
       <outgoing>flow2</outgoing>
-    </userTask>
-    <userTask completionQuantity="1" id="usertask3" implementation="##unspecified" isForCompensation="false" name="Handle Request" startQuantity="1">
+      <outgoing>flow4</outgoing>
+    </serviceTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="servicetask1"/>
+    <serviceTask activiti:class="activiti.B" completionQuantity="1" id="servicetask2" implementation="##WebService" isForCompensation="false" name="Service Task" startQuantity="1">
       <incoming>flow2</incoming>
+      <incoming>flow6</incoming>
       <outgoing>flow3</outgoing>
-    </userTask>
+    </serviceTask>
+    <sequenceFlow id="flow2" sourceRef="servicetask1" targetRef="servicetask2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${days==5}]]></conditionExpression>
+    </sequenceFlow>
     <endEvent id="endevent1" name="End">
       <incoming>flow3</incoming>
+      <incoming>flow5</incoming>
       <inputSet/>
     </endEvent>
-    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="usertask1"/>
-    <sequenceFlow id="flow2" sourceRef="usertask1" targetRef="usertask3"/>
-    <sequenceFlow id="flow3" sourceRef="usertask3" targetRef="endevent1"/>
+    <sequenceFlow id="flow3" sourceRef="servicetask2" targetRef="endevent1"/>
+    <serviceTask activiti:class="activiti.C" completionQuantity="1" id="servicetask3" implementation="##WebService" isForCompensation="false" name="Service Task" startQuantity="1">
+      <incoming>flow4</incoming>
+      <outgoing>flow5</outgoing>
+      <outgoing>flow6</outgoing>
+    </serviceTask>
+    <sequenceFlow id="flow4" sourceRef="servicetask1" targetRef="servicetask3">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${days==6}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow5" sourceRef="servicetask3" targetRef="endevent1"/>
+    <sequenceFlow id="flow6" sourceRef="servicetask3" targetRef="servicetask2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${name=='B'}]]></conditionExpression>
+    </sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="Yaoqiang_Diagram-process1" name="Untitled Diagram" resolution="96.0">
     <bpmndi:BPMNPlane bpmnElement="process1">
       <bpmndi:BPMNShape bpmnElement="startevent1" id="Yaoqiang-startevent1">
-        <omgdc:Bounds height="32.0" width="32.0" x="150.0" y="190.0"/>
+        <omgdc:Bounds height="32.0" width="32.0" x="80.0" y="190.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="21.02" width="29.0" x="151.5" y="229.47"/>
+          <omgdc:Bounds height="19.84" width="29.0" x="81.5" y="230.08"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="usertask1" id="Yaoqiang-usertask1">
-        <omgdc:Bounds height="55.0" width="105.0" x="230.0" y="180.0"/>
+      <bpmndi:BPMNShape bpmnElement="servicetask1" id="Yaoqiang-servicetask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="180.0" y="156.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="21.02" width="91.0" x="237.0" y="198.99"/>
+          <omgdc:Bounds height="19.84" width="69.0" x="198.0" y="175.58"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="usertask3" id="Yaoqiang-usertask3">
-        <omgdc:Bounds height="55.0" width="105.0" x="380.0" y="180.0"/>
+      <bpmndi:BPMNShape bpmnElement="servicetask2" id="Yaoqiang-servicetask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="440.0" y="20.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="21.02" width="82.0" x="391.5" y="198.99"/>
+          <omgdc:Bounds height="19.84" width="69.0" x="458.0" y="39.58"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent1" id="Yaoqiang-endevent1">
-        <omgdc:Bounds height="32.0" width="32.0" x="530.0" y="190.0"/>
+        <omgdc:Bounds height="32.0" width="32.0" x="780.0" y="200.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="21.02" width="24.0" x="534.0" y="229.47"/>
+          <omgdc:Bounds height="19.84" width="24.0" x="784.0" y="240.08"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge bpmnElement="flow3" id="Yaoqiang-flow3">
-        <omgdi:waypoint x="485.0" y="207.5"/>
-        <omgdi:waypoint x="530.0" y="206.0"/>
+      <bpmndi:BPMNShape bpmnElement="servicetask3" id="Yaoqiang-servicetask3">
+        <omgdc:Bounds height="55.0" width="105.0" x="451.0" y="250.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="21.02" width="6.0" x="504.5" y="196.24"/>
+          <omgdc:Bounds height="19.84" width="69.0" x="469.0" y="269.58"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="Yaoqiang-flow6">
+        <omgdi:waypoint x="498.0" y="250.5"/>
+        <omgdi:waypoint x="498.0" y="75.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="19.84" width="69.0" x="463.5" y="153.08"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="Yaoqiang-flow5">
+        <omgdi:waypoint x="556.5" y="277.5"/>
+        <omgdi:waypoint x="780.5078144082805" y="216.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="19.84" width="6.0" x="665.0" y="236.33"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="Yaoqiang-flow4">
+        <omgdi:waypoint x="285.5" y="183.5"/>
+        <omgdi:waypoint x="451.5" y="277.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="19.84" width="62.0" x="337.0" y="221.08"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="Yaoqiang-flow3">
+        <omgdi:waypoint x="545.5" y="47.5"/>
+        <omgdi:waypoint x="780.5078144082805" y="216.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="19.84" width="6.0" x="659.5" y="122.34"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="Yaoqiang-flow2">
-        <omgdi:waypoint x="335.0" y="207.5"/>
-        <omgdi:waypoint x="380.0" y="207.5"/>
+        <omgdi:waypoint x="285.5" y="183.5"/>
+        <omgdi:waypoint x="440.5" y="47.5"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="21.02" width="6.0" x="354.5" y="196.99"/>
+          <omgdc:Bounds height="19.84" width="62.0" x="331.5" y="105.08"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow1" id="Yaoqiang-flow1">
-        <omgdi:waypoint x="182.0" y="206.0"/>
-        <omgdi:waypoint x="230.0" y="207.5"/>
+        <omgdi:waypoint x="112.49218559171948" y="206.0"/>
+        <omgdi:waypoint x="180.5" y="183.5"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="21.02" width="6.0" x="203.0" y="196.24"/>
+          <omgdc:Bounds height="19.84" width="6.0" x="143.0" y="184.34"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

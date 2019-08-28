@@ -22,7 +22,7 @@ public class First {
 		RuntimeService runtimeService = engine.getRuntimeService();
 		// 部署流程文件
 		repositoryService.createDeployment()
-				.addClasspathResource("bpmn/First2.bpmn").deploy();
+				.addClasspathResource("bpmn/First.bpmn").deploy();
 		// 启动流程
 		runtimeService.startProcessInstanceByKey("process1");
 		// 退出
