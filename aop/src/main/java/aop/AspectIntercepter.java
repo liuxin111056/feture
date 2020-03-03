@@ -18,22 +18,31 @@ import service.Person;
 @Component//声明这是一个组件，泛指...可以去掉
 public class AspectIntercepter {
 
-	@Pointcut(value="execution(* service.personServerImpl.save(..))")
+	@Pointcut(value="execution(* service.personServerImpl.*(..))")
 	private void pointCut(){//定义一个切入点 后面的通知直接引入切入点方法pointCut即可            personServerImpl下面的所有方法
 	}
 
 	//环绕通知（连接到切入点开始执行，下一步进入前置通知，在下一步才是执行操作方法）
-	@Around(value="pointCut()")
-	public Object doBasicProfiling(ProceedingJoinPoint pjp) throws Throwable{
+	/*@Around("execution(* service..*.*(..)) && @annotation(exceptionCatch)")
+	public Object doBasicProfiling(ProceedingJoinPoint pjp, ExceptionCatch exceptionCatch) throws Throwable{
 		System.out.println("@Around进入环绕通知...");
 		Object object = pjp.proceed();//执行该方法
 		System.out.println(pjp.getThis()+"  操作结束，退出方法;环绕[@Around]结束！...");
 		return object;
 
+	}*/
+
+	//异常通知（出错时执行） 通过注解实现
+	@AfterThrowing("execution(* service..*.*(..)) && @annotation(exceptionCatch)")
+	public void doAfterThrow(JoinPoint joinPoint,ExceptionCatch exceptionCatch){
+		System.out.println("@AfterThrowing例外通知(异常通知)"+Arrays.toString(joinPoint.getArgs()));
+		System.out.println("@AfterThrowing异常信息："+exceptionCatch);
 	}
 
+
+
 	//前置通知（进入环绕后执行，下一步执行方法）
-	@Before(value="pointCut()")
+/*	@Before(value="pointCut()")
 	public void doAccessCheck(JoinPoint joinPoint){
 		System.out.println("@Before前置通知:"+Arrays.toString(joinPoint.getArgs()));
 	}
@@ -62,5 +71,5 @@ public class AspectIntercepter {
 		Person pp=(Person)rvt;
 		System.out.println("AfterReturning增强：获取目标方法的返回值：" + pp.getName());
 		return rvt;
-	}
+	}*/
 }
