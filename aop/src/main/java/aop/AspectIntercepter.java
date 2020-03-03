@@ -14,53 +14,53 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import service.Person;
 
-@Aspect//ÉùÃ÷ÕâÊÇÒ»¸öÇĞÃæ
-@Component//ÉùÃ÷ÕâÊÇÒ»¸ö×é¼ş£¬·ºÖ¸...¿ÉÒÔÈ¥µô
+@Aspect//å£°æ˜è¿™æ˜¯ä¸€ä¸ªåˆ‡é¢
+@Component//å£°æ˜è¿™æ˜¯ä¸€ä¸ªç»„ä»¶ï¼Œæ³›æŒ‡...å¯ä»¥å»æ‰
 public class AspectIntercepter {
 
-	  @Pointcut(value="execution(* service.personServerImpl.save(..))")
-	  private void pointCut(){//¶¨ÒåÒ»¸öÇĞÈëµã ºóÃæµÄÍ¨ÖªÖ±½ÓÒıÈëÇĞÈëµã·½·¨pointCut¼´¿É            personServerImplÏÂÃæµÄËùÓĞ·½·¨
-	  }
+	@Pointcut(value="execution(* service.personServerImpl.save(..))")
+	private void pointCut(){//å®šä¹‰ä¸€ä¸ªåˆ‡å…¥ç‚¹ åé¢çš„é€šçŸ¥ç›´æ¥å¼•å…¥åˆ‡å…¥ç‚¹æ–¹æ³•pointCutå³å¯            personServerImplä¸‹é¢çš„æ‰€æœ‰æ–¹æ³•
+	}
 
-	   //»·ÈÆÍ¨Öª£¨Á¬½Óµ½ÇĞÈëµã¿ªÊ¼Ö´ĞĞ£¬ÏÂÒ»²½½øÈëÇ°ÖÃÍ¨Öª£¬ÔÚÏÂÒ»²½²ÅÊÇÖ´ĞĞ²Ù×÷·½·¨£©
-	    @Around(value="pointCut()")
-	    public Object doBasicProfiling(ProceedingJoinPoint pjp) throws Throwable{
-	        System.out.println("@Around½øÈë»·ÈÆÍ¨Öª...");
-	        Object object = pjp.proceed();//Ö´ĞĞ¸Ã·½·¨
-	        System.out.println(pjp.getThis()+"  ²Ù×÷½áÊø£¬ÍË³ö·½·¨;»·ÈÆ[@Around]½áÊø£¡...");
-	      return object;
+	//ç¯ç»•é€šçŸ¥ï¼ˆè¿æ¥åˆ°åˆ‡å…¥ç‚¹å¼€å§‹æ‰§è¡Œï¼Œä¸‹ä¸€æ­¥è¿›å…¥å‰ç½®é€šçŸ¥ï¼Œåœ¨ä¸‹ä¸€æ­¥æ‰æ˜¯æ‰§è¡Œæ“ä½œæ–¹æ³•ï¼‰
+	@Around(value="pointCut()")
+	public Object doBasicProfiling(ProceedingJoinPoint pjp) throws Throwable{
+		System.out.println("@Aroundè¿›å…¥ç¯ç»•é€šçŸ¥...");
+		Object object = pjp.proceed();//æ‰§è¡Œè¯¥æ–¹æ³•
+		System.out.println(pjp.getThis()+"  æ“ä½œç»“æŸï¼Œé€€å‡ºæ–¹æ³•;ç¯ç»•[@Around]ç»“æŸï¼...");
+		return object;
 
-	    }
+	}
 
-	    //Ç°ÖÃÍ¨Öª£¨½øÈë»·ÈÆºóÖ´ĞĞ£¬ÏÂÒ»²½Ö´ĞĞ·½·¨£©
-	    @Before(value="pointCut()")
-	    public void doAccessCheck(JoinPoint joinPoint){
-	        System.out.println("@BeforeÇ°ÖÃÍ¨Öª:"+Arrays.toString(joinPoint.getArgs()));
-	    }
+	//å‰ç½®é€šçŸ¥ï¼ˆè¿›å…¥ç¯ç»•åæ‰§è¡Œï¼Œä¸‹ä¸€æ­¥æ‰§è¡Œæ–¹æ³•ï¼‰
+	@Before(value="pointCut()")
+	public void doAccessCheck(JoinPoint joinPoint){
+		System.out.println("@Beforeå‰ç½®é€šçŸ¥:"+Arrays.toString(joinPoint.getArgs()));
+	}
 
-	    //Òì³£Í¨Öª£¨³ö´íÊ±Ö´ĞĞ£©
-	    @AfterThrowing(value="pointCut()",throwing="ex")
-	    public void doAfterThrow(JoinPoint joinPoint,Throwable ex){
-	        System.out.println("@AfterThrowingÀıÍâÍ¨Öª(Òì³£Í¨Öª)"+Arrays.toString(joinPoint.getArgs()));
-	        System.out.println("@AfterThrowingÒì³£ĞÅÏ¢£º"+ex);
-	    }
+	//å¼‚å¸¸é€šçŸ¥ï¼ˆå‡ºé”™æ—¶æ‰§è¡Œï¼‰
+	@AfterThrowing(value="pointCut()",throwing="ex")
+	public void doAfterThrow(JoinPoint joinPoint,Throwable ex){
+		System.out.println("@AfterThrowingä¾‹å¤–é€šçŸ¥(å¼‚å¸¸é€šçŸ¥)"+Arrays.toString(joinPoint.getArgs()));
+		System.out.println("@AfterThrowingå¼‚å¸¸ä¿¡æ¯ï¼š"+ex);
+	}
 
-	    //ºóÖÃÍ¨Öª(·µ»ØÖ®Ç°Ö´ĞĞ)
-	    @After(value="pointCut()")
-	    public void after(){
-	    	System.out.println("@AfterºóÖÃÍ¨Öª...");
-	    }
+	//åç½®é€šçŸ¥(è¿”å›ä¹‹å‰æ‰§è¡Œ)
+	@After(value="pointCut()")
+	public void after(){
+		System.out.println("@Afteråç½®é€šçŸ¥...");
+	}
 
-	    //×îÖÕÍ¨Öª£¨Õı³£·µ»ØÍ¨Öª£¬×îºóÖ´ĞĞ£©
-	    @AfterReturning(value="pointCut()")
-	    public void doAfter(){
-	        System.out.println("@AfterReturning×îÖÕÍ¨Öª...End!");
-	    }
+	//æœ€ç»ˆé€šçŸ¥ï¼ˆæ­£å¸¸è¿”å›é€šçŸ¥ï¼Œæœ€åæ‰§è¡Œï¼‰
+	@AfterReturning(value="pointCut()")
+	public void doAfter(){
+		System.out.println("@AfterReturningæœ€ç»ˆé€šçŸ¥...End!");
+	}
 	@AfterReturning(returning="rvt", value="pointCut()")
 	public Object AfterExec(JoinPoint joinPoint,Object rvt){
-		//pointcutÊÇ¶ÔÓ¦µÄ×¢½âÀà   rvt¾ÍÊÇ·½·¨ÔËĞĞÍêÖ®ºóÒª·µ»ØµÄÖµ
+		//pointcutæ˜¯å¯¹åº”çš„æ³¨è§£ç±»   rvtå°±æ˜¯æ–¹æ³•è¿è¡Œå®Œä¹‹åè¦è¿”å›çš„å€¼
 		Person pp=(Person)rvt;
-		System.out.println("AfterReturningÔöÇ¿£º»ñÈ¡Ä¿±ê·½·¨µÄ·µ»ØÖµ£º" + pp.getName());
+		System.out.println("AfterReturningå¢å¼ºï¼šè·å–ç›®æ ‡æ–¹æ³•çš„è¿”å›å€¼ï¼š" + pp.getName());
 		return rvt;
 	}
 }

@@ -6,13 +6,13 @@ import service.personServer;
 
 public class SpringAopTest {
 
-	    @Test
-	    public void inteceptorTest() throws Exception{
-	        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext-aop.xml");
-	        personServer bean = (personServer)ctx.getBean("personServiceBean");
-	        bean.save("badMonkey",23);
-	        
-//	    	personServer p = new personServerImpl();//Í¨¹ınew¶ÔÏóÊÇ²»»á´¥·¢aopµÄ
+	@Test
+	public void inteceptorTest() throws Exception{
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext-aop.xml");
+		personServer bean = (personServer)ctx.getBean("personServiceBean");
+		bean.save("badMonkey",23);
+
+//	    	personServer p = new personServerImpl();//é€šè¿‡newå¯¹è±¡æ˜¯ä¸ä¼šè§¦å‘aopçš„
 //	    	p.save("11", "22");
-	    }
+	}
 }

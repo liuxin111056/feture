@@ -5,7 +5,7 @@ public class personServerImpl implements personServer{
 	public Person save(String uname,int age) throws Exception {
 		int a=0;
 		try {
-			age= age/a;//打开上面两行报错，可触发异常通知
+			age= age/a;//鎵撳紑涓婇潰涓よ鎶ラ敊锛屽彲瑙﹀彂寮傚父閫氱煡
 		}catch (Exception e){
 			throw new Exception("123");
 		}
@@ -13,7 +13,7 @@ public class personServerImpl implements personServer{
 		System.out.println("come in personServerImpl save method...");
 		Person p=new Person();
 		p.setAge(1);
-		p.setName("霑傘");
+		p.setName("闇戝倶");
 		return p;
 	}
 }
