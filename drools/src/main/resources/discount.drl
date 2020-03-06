@@ -1,0 +1,17 @@
+
+import drools.Order;
+dialect  "mvel"
+
+rule "First Rule"
+    when
+      order:Order(sumprice>30,sumprice<=50);
+    then
+      order.setDiscountPercent(98);
+end
+
+rule "Second Rule"
+    when
+      order:Order(sumprice>50,sumprice<=100);
+    then
+      order.setDiscountPercent(95);
+end
