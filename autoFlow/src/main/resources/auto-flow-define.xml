@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:autoflow="http://code.fintechervision.com/schema/autoflow"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://code.fintechervision.com/schema/autoflow http://code.fintechervision.com/schema/autoflow/autoflow.xsd">
+
+	<!-- T日的日终批量 -->
+	<autoflow:flow id="fdpJob" desc="授权流程">
+		<autoflow:step id="cardValidate" next="quotaValidate" ref ="step1" desc="卡验证"/>
+		
+		<autoflow:step id="quotaValidate" next="riskValidate" ref="step2" desc="额度验证"/>
+		
+		<autoflow:step id="riskValidate" ref="step3" desc="反欺诈"/>
+		
+	</autoflow:flow>
+</beans>

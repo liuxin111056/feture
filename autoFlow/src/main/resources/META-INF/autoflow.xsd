@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://code.fintechervision.com/schema/autoflow"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:tool="http://www.springframework.org/schema/tool"
+	targetNamespace="http://code.fintechervision.com/schema/autoflow">
+	
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+	<xsd:import namespace="http://www.springframework.org/schema/beans"/>
+	<xsd:import namespace="http://www.springframework.org/schema/tool"/>
+
+	<xsd:annotation>
+		<xsd:documentation><![CDATA[ Namespace support for the zeus autoflow provided by zues framework. ]]></xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:element name="flow" >
+		<xsd:annotation> 
+			<xsd:documentation>
+				<![CDATA[ The flow config ]]>
+			</xsd:documentation> 
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+					<xsd:group ref="stepElements" />
+					<xsd:attribute name="desc" type="xsd:string" />
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:group name="stepElements">
+		<xsd:sequence>
+			<xsd:element name="description" type="description" minOccurs="0" />
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element ref="step" />
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:group>
+	
+	<xsd:element name="step">
+		<xsd:annotation> 
+			<xsd:documentation><![CDATA[ The flow step config ]]></xsd:documentation> 
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="stepType">
+					<xsd:attribute name="id" type="xsd:ID" use="required" />
+					<xsd:attribute name="ref" type="xsd:string" use="required" />
+					<xsd:attribute name="next" type="xsd:string" />
+					<xsd:attribute name="desc" type="xsd:string" />
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:simpleType name="description">
+		<xsd:annotation>
+			<xsd:documentation>Contains informative text describing</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+	
+	<xsd:complexType name="stepType">
+		<xsd:sequence>
+			<xsd:element name="description" type="description" minOccurs="0" />
+			<xsd:choice minOccurs="0" maxOccurs="1">
+				<xsd:element name="job">
+					<xsd:complexType>
+						<xsd:attribute name="ref">
+							<xsd:annotation>
+								<xsd:documentation source="java:com.fintechervision.zeus.autoflow.config.FlowBean"><![CDATA[
+							The job that will execute in this step.
+							]]></xsd:documentation>
+								<xsd:appinfo>
+									<tool:annotation kind="ref">
+										<tool:expected-type type="com.fintechervision.zeus.autoflow.config.FlowBean" />
+									</tool:annotation>
+								</xsd:appinfo>
+							</xsd:annotation>
+						</xsd:attribute>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:attributeGroup name="allowStartIfCompleteAttribute">
+		<xsd:attribute name="allow-start-if-complete" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[
+				Set to true to allow a step to be started even if it is already complete.
+				]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+</xsd:schema>
