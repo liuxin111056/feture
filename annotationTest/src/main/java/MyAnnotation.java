@@ -11,7 +11,7 @@ import java.util.List;
  **/
 public class MyAnnotation {
 
-    public static <T> List<ValidateResult> validate(T t){
+    public static <T> StringBuilder validate(T t){
         List<ValidateResult> validateResults = new ArrayList<>();
         Field[] fields = t.getClass().getDeclaredFields();
         for (Field field:fields) {
@@ -32,6 +32,13 @@ public class MyAnnotation {
             }
 
         }
-        return validateResults;
+
+        StringBuilder str = new StringBuilder();
+        for (ValidateResult va : validateResults) {
+            if (!va.isValid()) {
+                str.append(va.getMessage()).append(",");
+            }
+        }
+        return str;
     }
 }
