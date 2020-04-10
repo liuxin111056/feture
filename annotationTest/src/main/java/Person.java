@@ -8,6 +8,7 @@ public class Person {
 
     @NotNull(fileName = "姓名")
     private String name;
+    @NotNum(fileName = "年龄")
     @NotNull(fileName = "年龄")
     private String age;
 

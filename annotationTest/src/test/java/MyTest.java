@@ -10,8 +10,8 @@ import java.util.List;
 public class MyTest {
     public static void main(String[] args) {
         Person person = new Person();
-      //  person.setName("张飞");
-     //   person.setAge("128");
+ //       person.setName("张飞");
+        person.setAge("128w");
         StringBuilder validate = MyAnnotation.validate(person);
 
         System.err.println(validate.toString());
