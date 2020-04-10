@@ -29,6 +29,6 @@ public class personServerImpl implements personServer{
 		int b=1;
 		int c = b / a;//打开上面两行报错，可触发异常通知
 
-			return null;
+		return null;
 		}
 }

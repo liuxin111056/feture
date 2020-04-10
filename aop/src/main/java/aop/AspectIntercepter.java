@@ -42,11 +42,26 @@ public class AspectIntercepter {
 
 
 	//前置通知（进入环绕后执行，下一步执行方法）
-/*	@Before(value="pointCut()")
+	@Before("execution(* service..*.*(..)) && @annotation(ExceptionCatch)")
 	public void doAccessCheck(JoinPoint joinPoint){
 		System.out.println("@Before前置通知:"+Arrays.toString(joinPoint.getArgs()));
 	}
 
+	//后置通知(返回之前执行)
+	@After("execution(* service..*.*(..)) && @annotation(ExceptionCatch)")
+	public void after(){
+		System.out.println("@After后置通知...");
+	}
+
+	@AfterReturning(returning="rvt", value="execution(* service..*.*(..)) && @annotation(ExceptionCatch)")
+	public Object AfterExec(JoinPoint joinPoint,Object rvt){
+		//pointcut是对应的注解类   rvt就是方法运行完之后要返回的值
+		Person pp=(Person)rvt;
+		System.out.println("AfterReturning增强：获取目标方法的返回值：" + pp.getName());
+		return rvt;
+	}
+
+/*
 	//异常通知（出错时执行）
 	@AfterThrowing(value="pointCut()",throwing="ex")
 	public void doAfterThrow(JoinPoint joinPoint,Throwable ex){
@@ -54,22 +69,12 @@ public class AspectIntercepter {
 		System.out.println("@AfterThrowing异常信息："+ex);
 	}
 
-	//后置通知(返回之前执行)
-	@After(value="pointCut()")
-	public void after(){
-		System.out.println("@After后置通知...");
-	}
+
 
 	//最终通知（正常返回通知，最后执行）
 	@AfterReturning(value="pointCut()")
 	public void doAfter(){
 		System.out.println("@AfterReturning最终通知...End!");
 	}
-	@AfterReturning(returning="rvt", value="pointCut()")
-	public Object AfterExec(JoinPoint joinPoint,Object rvt){
-		//pointcut是对应的注解类   rvt就是方法运行完之后要返回的值
-		Person pp=(Person)rvt;
-		System.out.println("AfterReturning增强：获取目标方法的返回值：" + pp.getName());
-		return rvt;
-	}*/
+	*/
 }
