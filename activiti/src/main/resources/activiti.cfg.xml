@@ -5,7 +5,7 @@
 	<!-- 流程引擎配置的bean -->
 	<bean id="processEngineConfiguration"
 		class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/act" />
+		<property name="jdbcUrl" value="jdbc:mysql://192.168.93.111:3306/xuesheng" />
 		<property name="jdbcDriver" value="com.mysql.jdbc.Driver" />
 		<property name="jdbcUsername" value="root" />
 		<property name="jdbcPassword" value="111056" />

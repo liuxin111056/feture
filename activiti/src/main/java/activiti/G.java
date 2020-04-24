@@ -8,7 +8,7 @@ public class G implements JavaDelegate{
 
 	public void execute(DelegateExecution execution) {
 		// TODO Auto-generated method stub
-		System.out.println("G----------------");
+		System.out.println("GG----------------");
 	}
 
 }
