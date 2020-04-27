@@ -9,6 +9,6 @@ public class Gate implements ExecutionListener {
 	public void notify(DelegateExecution delegateExecution) {
 		// TODO Auto-generated method stub
 		System.out.println("Gate----------------");
-		delegateExecution.setVariable("redict", "H");
+		delegateExecution.setVariable("redict", "G");
 	}
 }
