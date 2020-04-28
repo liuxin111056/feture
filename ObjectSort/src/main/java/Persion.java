@@ -34,7 +34,7 @@ public class Persion {
 
         Persion p3=new Persion();
         p3.setName("p3");
-        p3.setAge(6);
+        p3.setAge(9);
 
         Persion p4=new Persion();
         p4.setName("p4");
@@ -43,10 +43,11 @@ public class Persion {
         p.add(p2);
         p.add(p3);
         p.add(p4);
-        //升序
+        //升序 只能根据一个字段排序
         p.sort((t1,t2) -> Integer.valueOf(t1.getAge()).compareTo(Integer.valueOf(t2.getAge())));
         for (int i=0;i<p.size();i++){
-            System.out.println(p.get(i).getAge());
+            System.out.println(p.get(i).getName() +"-------"+p.get(i).getAge());
+
         }
     }
 }
