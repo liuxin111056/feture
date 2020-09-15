@@ -9,7 +9,6 @@ import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class mongodbTest {
     //插入一个文档
     @Test

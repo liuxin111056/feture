@@ -12,7 +12,6 @@ public class MongoDBUtil {
     public static MongoDatabase getConnect(){
         //连接到 mongodb 服务
         MongoClient mongoClient = new MongoClient("192.168.1.111", 27017);
-
         //连接到数据库
         MongoDatabase mongoDatabase = mongoClient.getDatabase("test");
 
