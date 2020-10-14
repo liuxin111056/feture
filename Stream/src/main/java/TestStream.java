@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -9,7 +10,7 @@ public class TestStream {
         p.setAge(20);
         Person p1=new Person();
         p1.setName("刘秀");
-        p1.setAge(22);
+        p1.setAge(12);
         List<Person> list=new ArrayList();
         list.add(p);
         list.add(p1);
@@ -31,7 +32,8 @@ public class TestStream {
         // 获取空字符串的数量
         long count = strings.stream().filter(s -> s.isEmpty()).count();
         //System.out.println(count);
-        List<Person> collect = list.stream().filter(person -> person.getAge() == 20).collect(Collectors.toList());
+        List<Person> collect = list.stream().filter(person -> person.getName().equals("刘备")).collect(Collectors.toList());
+        //System.out.println(collect.size());
         collect.stream().forEach(person -> System.out.println(person.getName()));
         //遍历
         collect.stream().forEach(person ->  {
@@ -59,10 +61,17 @@ public class TestStream {
 
         IntSummaryStatistics stats = numbers.stream().mapToInt((x) -> x).summaryStatistics();
 
-        System.out.println("列表中最大的数 : " + stats.getMax());
-        System.out.println("列表中最小的数 : " + stats.getMin());
-        System.out.println("所有数之和 : " + stats.getSum());
-        System.out.println("平均数 : " + stats.getAverage());
+        //System.out.println("列表中最大的数 : " + stats.getMax());
+        //System.out.println("列表中最小的数 : " + stats.getMin());
+        //System.out.println("所有数之和 : " + stats.getSum());
+        //System.out.println("平均数 : " + stats.getAverage());
+
+        IntSummaryStatistics stats1 = list.stream().mapToInt((x) -> x.getAge()).summaryStatistics();
+        //System.out.println("列表中最小的数 : " + stats1.getMin());
+
+        SimpleDateFormat f=new SimpleDateFormat("yyyy-mm-dd");
+        String format = f.format(new Date());
+        System.out.println(format);
 
     }
 }
