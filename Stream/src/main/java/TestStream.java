@@ -72,5 +72,15 @@ public class TestStream {
         String format = f.format(new Date());
         System.out.println(format);
 
+        int a=1;
+        for(int i=0;i<3;i++){
+            if (i==0){
+               a=2;
+               continue;
+            }
+            System.out.println(i);
+        }
+
+
     }
 }
